@@ -1,0 +1,193 @@
+clear all
+clc
+close all
+
+prompt = 'Introduzca el valor en grados de la rotacion "X" (phi): '; %Imprimo y espero a que el usuario introduzca una variable
+phiDeg = input(prompt);                                             %Meto un valor en grados
+
+prompt = 'Introduzca el valor en grados de la rotacion "Y" (theta): '; 
+thetaDeg = input(prompt);
+
+prompt = 'Introduzca el valor en grados de la rotacion "Z" (psi): '; 
+psiDeg = input(prompt);
+
+%%Para convertir de radianes a grados
+phiRad = deg2rad(phiDeg);           %�ngulo en X
+thetaRad = deg2rad(thetaDeg);       %�ngulo en Y
+psiRad = deg2rad(psiDeg);           %�ngulo en Z
+
+
+%ROTACI�N EN "X"
+for t=0:0.01: phiRad
+    clf
+    
+line ([-8 8],[0 0],[0 0], 'color', [1 0 0], 'linewidth',1); %Establece el eje X Rojo 
+line ([0 0],[-8 8],[0 0], 'color', [0 0 1], 'linewidth',1); %Establece el eje Y Azul 
+line ([0 0],[0 0],[-8 8], 'color', [0 1 0], 'linewidth',1); %Establece el eje Z Verde 
+
+grid on
+view(120,30)    %Formato para ver en 3D al inicio el plano
+
+P0i = [ 7, 3, 0]; %[Punto_inicial]
+P1i = [ 0, 3, 0]; %[Punto_inicial]
+P2i = [ 0, 0, 0]; %[Punto_inicial]
+P3i = [ 7, 0, 0]; %[Punto_inicial]
+P4i = [ 7, 3, 2]; %[Punto_inicial]
+P5i = [ 0, 3, 2]; %[Punto_inicial]
+P6i = [ 0, 0, 2]; %[Punto_inicial]
+P7i = [ 7, 0, 2]; %[Punto_inicial]
+
+
+line ([P0i(1) P1i(1)],[P0i(2) P1i(2)],[P0i(3) P1i(3)], 'color', [0 0 0], 'linewidth',1.7); 
+line ([P1i(1) P2i(1)],[P1i(2) P2i(2)],[P1i(3) P2i(3)], 'color', [0 0 0], 'linewidth',1.7); 
+line ([P2i(1) P3i(1)],[P2i(2) P3i(2)],[P2i(3) P3i(3)], 'color', [0 0 0], 'linewidth',1.7); 
+line ([P3i(1) P0i(1)],[P3i(2) P0i(2)],[P3i(3) P0i(3)], 'color', [0 0 0], 'linewidth',1.7);
+
+line ([P4i(1) P5i(1)],[P4i(2) P5i(2)],[P4i(3) P4i(3)], 'color', [0 0 0], 'linewidth',1.7); 
+line ([P5i(1) P6i(1)],[P5i(2) P6i(2)],[P5i(3) P5i(3)], 'color', [0 0 0], 'linewidth',1.7); 
+line ([P6i(1) P7i(1)],[P6i(2) P7i(2)],[P6i(3) P7i(3)], 'color', [0 0 0], 'linewidth',1.7);  
+line ([P7i(1) P4i(1)],[P7i(2) P4i(2)],[P7i(3) P7i(3)], 'color', [0 0 0], 'linewidth',1.7); 
+
+line ([P0i(1) P4i(1)],[P0i(2) P4i(2)],[P0i(3) P4i(3)], 'color', [0 0 0], 'linewidth',1.7); 
+line ([P1i(1) P5i(1)],[P1i(2) P5i(2)],[P1i(3) P5i(3)], 'color', [0 0 0], 'linewidth',1.7);
+line ([P2i(1) P6i(1)],[P2i(2) P6i(2)],[P2i(3) P6i(3)], 'color', [0 0 0], 'linewidth',1.7); 
+line ([P3i(1) P7i(1)],[P3i(2) P7i(2)],[P3i(3) P7i(3)], 'color', [0 0 0], 'linewidth',1.7); 
+
+%Para hacer rotaci�n en eje X
+Rx=[1 0 0 ; 0 cos(t) -sin(t) ; 0 sin(t) cos(t)];
+
+P0rx = Rx*P0i';
+P1rx = Rx*P1i';
+P2rx = Rx*P2i';
+P3rx = Rx*P3i';
+P4rx = Rx*P4i';
+P5rx = Rx*P5i';
+P6rx = Rx*P6i';
+P7rx = Rx*P7i';
+
+line ([P0rx(1) P1rx(1)],[P0rx(2) P1rx(2)],[P0rx(3) P1rx(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P1rx(1) P2rx(1)],[P1rx(2) P2rx(2)],[P1rx(3) P2rx(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P2rx(1) P3rx(1)],[P2rx(2) P3rx(2)],[P2rx(3) P3rx(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P3rx(1) P0rx(1)],[P3rx(2) P0rx(2)],[P3rx(3) P0rx(3)], 'color', [0 .6 .3], 'linewidth',1.7);
+
+line ([P4rx(1) P5rx(1)],[P4rx(2) P5rx(2)],[P4rx(3) P5rx(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P5rx(1) P6rx(1)],[P5rx(2) P6rx(2)],[P5rx(3) P6rx(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P6rx(1) P7rx(1)],[P6rx(2) P7rx(2)],[P6rx(3) P7rx(3)], 'color', [0 .6 .3], 'linewidth',1.7);  
+line ([P7rx(1) P4rx(1)],[P7rx(2) P4rx(2)],[P7rx(3) P4rx(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+
+line ([P0rx(1) P4rx(1)],[P0rx(2) P4rx(2)],[P0rx(3) P4rx(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P1rx(1) P5rx(1)],[P1rx(2) P5rx(2)],[P1rx(3) P5rx(3)], 'color', [0 .6 .3], 'linewidth',1.7);
+line ([P2rx(1) P6rx(1)],[P2rx(2) P6rx(2)],[P2rx(3) P6rx(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P3rx(1) P7rx(1)],[P3rx(2) P7rx(2)],[P3rx(3) P7rx(3)], 'color', [0 .6 .3], 'linewidth',1.7);
+
+pause(0.01)
+end
+
+%ROTACI�N EN Y
+
+for t=0:0.01: thetaRad
+    
+    clf
+line ([-8 8],[0 0],[0 0], 'color', [1 0 0], 'linewidth',1); %Establece el eje X Rojo 
+line ([0 0],[-8 8],[0 0], 'color', [0 0 1], 'linewidth',1); %Establece el eje Y Azul 
+line ([0 0],[0 0],[-8 8], 'color', [0 1 0], 'linewidth',1); %Establece el eje Z Verde 
+
+grid on
+view(120,30)    %Formato para ver en 3D al inicio el plano
+
+P0 = P0rx; %[Punto_inicial]
+P1 = P1rx; %[Punto_inicial]
+P2 = P2rx; %[Punto_inicial]
+P3 = P3rx; %[Punto_inicial]
+P4 = P4rx; %[Punto_inicial]
+P5 = P5rx; %[Punto_inicial]
+P6 = P6rx; %[Punto_inicial]
+P7 = P7rx; %[Punto_inicial]
+
+%Para hacer rotaci�n en eje Y
+Ry=[cos(t) 0 sin(t) ; 0 1 0 ; -sin(t) 0 cos(t)];
+
+%%%%%NOTA
+%%%%%NO SE PONE TRASPUESTA YA QUE ANTERIORMENTE YA SE HIZO ESTE PROCEDIMIENTO
+P0ry = Ry*P0;
+P1ry = Ry*P1;
+P2ry = Ry*P2;
+P3ry = Ry*P3;
+P4ry = Ry*P4;
+P5ry = Ry*P5;
+P6ry = Ry*P6;
+P7ry = Ry*P7;
+
+line ([P0ry(1) P1ry(1)],[P0ry(2) P1ry(2)],[P0ry(3) P1ry(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P1ry(1) P2ry(1)],[P1ry(2) P2ry(2)],[P1ry(3) P2ry(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P2ry(1) P3ry(1)],[P2ry(2) P3ry(2)],[P2ry(3) P3ry(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P3ry(1) P0ry(1)],[P3ry(2) P0ry(2)],[P3ry(3) P0ry(3)], 'color', [0 .6 .3], 'linewidth',1.7);
+
+line ([P4ry(1) P5ry(1)],[P4ry(2) P5ry(2)],[P4ry(3) P5ry(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P5ry(1) P6ry(1)],[P5ry(2) P6ry(2)],[P5ry(3) P6ry(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P6ry(1) P7ry(1)],[P6ry(2) P7ry(2)],[P6ry(3) P7ry(3)], 'color', [0 .6 .3], 'linewidth',1.7);  
+line ([P7ry(1) P4ry(1)],[P7ry(2) P4ry(2)],[P7ry(3) P4ry(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+
+line ([P0ry(1) P4ry(1)],[P0ry(2) P4ry(2)],[P0ry(3) P4ry(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P1ry(1) P5ry(1)],[P1ry(2) P5ry(2)],[P1ry(3) P5ry(3)], 'color', [0 .6 .3], 'linewidth',1.7);
+line ([P2ry(1) P6ry(1)],[P2ry(2) P6ry(2)],[P2ry(3) P6ry(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P3ry(1) P7ry(1)],[P3ry(2) P7ry(2)],[P3ry(3) P7ry(3)], 'color', [0 .6 .3], 'linewidth',1.7);
+
+pause(0.01)
+end
+
+%ROTACI�N EN Z
+
+for t=0:0.01: psiRad 
+    clf
+    
+line ([-8 8],[0 0],[0 0], 'color', [1 0 0], 'linewidth',1); %Establece el eje X Rojo 
+line ([0 0],[-8 8],[0 0], 'color', [0 0 1], 'linewidth',1); %Establece el eje Y Azul 
+line ([0 0],[0 0],[-8 8], 'color', [0 1 0], 'linewidth',1); %Establece el eje Z Verde 
+
+grid on
+view(120,30)    %Formato para ver en 3D al inicio el plano
+
+P0 = P0ry; %[Punto_inicial]
+P1 = P1ry; %[Punto_inicial]
+P2 = P2ry; %[Punto_inicial]
+P3 = P3ry; %[Punto_inicial]
+P4 = P4ry; %[Punto_inicial]
+P5 = P5ry; %[Punto_inicial]
+P6 = P6ry; %[Punto_inicial]
+P7 = P7ry; %[Punto_inicial]
+
+%Para hacer rotaci�n en eje Z
+Rz=[cos(t) -sin(t) 0 ; sin(t) cos(t) 0 ; 0 0 1];
+
+P0rz = Rz*P0;
+P1rz = Rz*P1;
+P2rz = Rz*P2;
+P3rz = Rz*P3;
+P4rz = Rz*P4;
+P5rz = Rz*P5;
+P6rz = Rz*P6;
+P7rz = Rz*P7;
+
+line ([P0rz(1) P1rz(1)],[P0rz(2) P1rz(2)],[P0rz(3) P1rz(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P1rz(1) P2rz(1)],[P1rz(2) P2rz(2)],[P1rz(3) P2rz(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P2rz(1) P3rz(1)],[P2rz(2) P3rz(2)],[P2rz(3) P3rz(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P3rz(1) P0rz(1)],[P3rz(2) P0rz(2)],[P3rz(3) P0rz(3)], 'color', [0 .6 .3], 'linewidth',1.7);
+
+line ([P4rz(1) P5rz(1)],[P4rz(2) P5rz(2)],[P4rz(3) P5rz(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P5rz(1) P6rz(1)],[P5rz(2) P6rz(2)],[P5rz(3) P6rz(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P6rz(1) P7rz(1)],[P6rz(2) P7rz(2)],[P6rz(3) P7rz(3)], 'color', [0 .6 .3], 'linewidth',1.7);  
+line ([P7rz(1) P4rz(1)],[P7rz(2) P4rz(2)],[P7rz(3) P4rz(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+
+line ([P0rz(1) P4rz(1)],[P0rz(2) P4rz(2)],[P0rz(3) P4rz(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P1rz(1) P5rz(1)],[P1rz(2) P5rz(2)],[P1rz(3) P5rz(3)], 'color', [0 .6 .3], 'linewidth',1.7);
+line ([P2rz(1) P6rz(1)],[P2rz(2) P6rz(2)],[P2rz(3) P6rz(3)], 'color', [0 .6 .3], 'linewidth',1.7); 
+line ([P3rz(1) P7rz(1)],[P3rz(2) P7rz(2)],[P3rz(3) P7rz(3)], 'color', [0 .6 .3], 'linewidth',1.7);
+
+pause(0.01)
+end
+
+
+
+
+
